@@ -21,7 +21,7 @@ const Footer = () => (
       <div className="footer-links">
         <h3>Quick Links</h3>
         <ul>
-          <li><Link to="/">Home</Link></li>
+          <li><Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Home</Link></li>
           <li><a href="/#about">About Us</a></li>
           <li><a href="/#services">Our Services</a></li>
           <li><a href="/#why-choose">Why Choose Us</a></li>
