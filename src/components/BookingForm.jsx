@@ -3,40 +3,49 @@ import { WHATSAPP_NUM, PRIMARY_PHONE, SECONDARY_PHONE, TERTIARY_PHONE, EMAIL } f
 
 const BookingForm = ({ title = "Get a Free Quote", className = "" }) => {
   const [formData, setFormData] = useState({
-    name: '', phone: '', pickup: '', drop: '', date: '', service: '', message: ''
+    name: '', phone: '', pickup: '', drop: '', date: '', service: '', message: '', hasImages: false
   });
+  const [error, setError] = useState('');
 
-  const handleChange = (e) => setFormData({ ...formData, [e.target.id]: e.target.value });
+  const handleChange = (e) => {
+    setError('');
+    const { id, value, type, checked } = e.target;
+    setFormData({ ...formData, [id]: type === 'checkbox' ? checked : value });
+  };
 
   // Get today's date in YYYY-MM-DD format for the date picker minimum
   const todayDate = new Date().toISOString().split('T')[0];
 
   const handleBookingSubmit = (e) => {
     e.preventDefault();
-    const { name, phone, pickup, drop, date, service, message } = formData;
+    setError('');
+    const { name, phone, pickup, drop, date, service, message, hasImages } = formData;
 
     // Phone validation (at least 10 digits)
     const digitsOnly = phone.replace(/\D/g, '');
     if (digitsOnly.length < 10) {
-      alert('Please enter a valid phone number (at least 10 digits).');
+      setError('Please enter a valid phone number (at least 10 digits).');
       return;
     }
 
     // Pickup & Drop validation
     if (pickup.trim().toLowerCase() === drop.trim().toLowerCase()) {
-      alert('Pickup and Drop locations cannot be the same.');
+      setError('Pickup and Drop locations cannot be the same.');
       return;
     }
 
-    // Date validation (fallback in case browser bypasses min attribute)
+    // Date validation
     if (date < todayDate) {
-      alert('Moving date cannot be in the past.');
+      setError('Moving date cannot be in the past.');
       return;
     }
 
-    const whatsappMessage = `New Booking:%0AName: ${name}%0APhone: ${phone}%0AFrom: ${pickup}%0ATo: ${drop}%0ADate: ${date}%0AService: ${service}%0AMessage: ${message ? message : ''}`;
+    const imageNote = hasImages ? "%0A(I have images of my items to share)" : "";
+    const whatsappMessage = `New Booking:%0AName: ${name}%0APhone: ${phone}%0AFrom: ${pickup}%0ATo: ${drop}%0ADate: ${date}%0AService: ${service}${imageNote}%0AMessage: ${message ? message : ''}`;
+    
     window.open(`https://wa.me/${WHATSAPP_NUM}?text=${whatsappMessage}`, '_blank');
-    setFormData({ name: '', phone: '', pickup: '', drop: '', date: '', service: '', message: '' });
+    setFormData({ name: '', phone: '', pickup: '', drop: '', date: '', service: '', message: '', hasImages: false });
+    setError('');
   };
 
   return (
@@ -98,9 +107,33 @@ const BookingForm = ({ title = "Get a Free Quote", className = "" }) => {
             </select>
           </div>
         </div>
+        <div className="form-row" style={{ marginBottom: '15px' }}>
+          <div className="input-group" style={{ display: 'flex', alignItems: 'center', gap: '10px', background: '#f9f9f9', padding: '10px', borderRadius: '6px', border: '1px dashed #ccc' }}>
+            <input 
+              type="checkbox" 
+              id="hasImages" 
+              checked={formData.hasImages} 
+              onChange={handleChange} 
+              style={{ width: '20px', height: '20px', cursor: 'pointer' }}
+            />
+            <label htmlFor="hasImages" style={{ fontSize: '0.9rem', color: '#555', cursor: 'pointer' }}>
+              I have images of my items (to share on WhatsApp)
+            </label>
+          </div>
+        </div>
+
+        {error && (
+          <div className="form-error" style={{ color: 'var(--primary-red)', backgroundColor: 'rgba(218,37,29,0.05)', padding: '10px', borderRadius: '6px', marginBottom: '15px', fontSize: '0.9rem', border: '1px solid rgba(218,37,29,0.1)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <i className="fas fa-exclamation-circle"></i> {error}
+          </div>
+        )}
+
         <button type="submit" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center', whiteSpace: 'normal', textAlign: 'center', lineHeight: '1.4' }}>
           <i className="fab fa-whatsapp"></i> Send Details via WhatsApp
         </button>
+        <p style={{ fontSize: '0.75rem', color: '#888', marginTop: '10px', textAlign: 'center' }}>
+          <i className="fas fa-info-circle"></i> Tip: Sharing images helps us give you a more accurate quote!
+        </p>
       </form>
     </div>
   );

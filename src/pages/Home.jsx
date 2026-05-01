@@ -88,15 +88,15 @@ const Home = () => {
       {/* ===== TRUST BADGES ===== */}
       <div className="trust-badges" aria-label="Trust certifications for Siri Packers and Movers">
         <div className="trust-badge">
-          <img src="/jd.png" alt="Justdial Certified Packers and Movers Hyderabad" className="trust-badge-icon" onError={(e) => e.target.style.display='none'} loading="lazy" />
+          <img src="/jd.png" alt="Justdial Certified Packers and Movers Hyderabad" className="trust-badge-icon" onError={(e) => e.target.style.display='none'} loading="lazy" fetchpriority="high" width="56" height="56" />
           <div>Justdial Certified</div>
         </div>
         <div className="trust-badge">
-          <img src="/suleka.png" alt="Sulekha Listed Packers and Movers" className="trust-badge-icon" onError={(e) => e.target.style.display='none'} loading="lazy" />
+          <img src="/suleka.png" alt="Sulekha Listed Packers and Movers" className="trust-badge-icon" onError={(e) => e.target.style.display='none'} loading="lazy" fetchpriority="high" width="56" height="56" />
           <div>Available on Sulekha</div>
         </div>
         <div className="trust-badge">
-          <img src="/logo-migrera.png" alt="Migrera Verified Movers" className="trust-badge-icon" onError={(e) => e.target.style.display='none'} loading="lazy" />
+          <img src="/logo-migrera.png" alt="Migrera Verified Movers" className="trust-badge-icon" onError={(e) => e.target.style.display='none'} loading="lazy" fetchpriority="high" width="56" height="56" />
           <div>Migrera Verified</div>
         </div>
       </div>
@@ -138,7 +138,7 @@ const Home = () => {
                 <SwiperSlide key={idx} style={{ width: 'max-content', display: 'flex' }}>
                   <div className="client-logo-pill" style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'white', padding: '6px 18px', borderRadius: '50px', border: '1.5px solid #f0f0f0', boxShadow: '0 4px 10px rgba(0,0,0,0.04)', width: 'max-content', transition: 'all 0.3s ease' }}>
                     <div className="client-logo-circle" style={{ width: '38px', height: '38px', borderRadius: '50%', overflow: 'hidden', background: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                      <img src={client.img} alt={client.name} style={{ width: '85%', height: '85%', objectFit: 'contain' }} />
+                      <img src={client.img} alt={client.name} style={{ width: '85%', height: '85%', objectFit: 'contain' }} loading="lazy" fetchpriority="high" width="32" height="32" />
                     </div>
                     <span style={{ fontWeight: '700', color: 'var(--dark-blue)', whiteSpace: 'nowrap', fontSize: '0.85rem', letterSpacing: '0.3px' }}>{client.name}</span>
                   </div>
@@ -154,7 +154,7 @@ const Home = () => {
         <div className="container">
           <div className="about-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', alignItems: 'center' }}>
             <div className="about-image-wrapper" style={{ position: 'relative' }}>
-              <img src="/aboutus.png" alt="Siri Packers and Movers team packing household goods for safe shifting in Hyderabad" className="main-image" style={{ width: '100%', borderRadius: '12px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }} loading="lazy" />
+              <img src="/aboutus.png" alt="Siri Packers and Movers team packing household goods for safe shifting in Hyderabad" className="main-image" style={{ width: '100%', borderRadius: '12px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }} loading="lazy" fetchpriority="high" width="600" height="500" />
               <div className="experience-badge" style={{ position: 'absolute', bottom: '-20px', right: '-20px', background: 'var(--primary-red)', color: 'white', padding: '20px', borderRadius: '50%', width: '120px', height: '120px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', boxShadow: '0 5px 15px rgba(218,37,29,0.3)', border: '5px solid white' }}>
                 <span className="years" style={{ fontSize: '1.8rem', fontWeight: 'bold', lineHeight: '1' }}>14+</span>
                 <span className="text" style={{ fontSize: '0.8rem', textAlign: 'center', lineHeight: '1.2', marginTop: '5px' }}>Years<br/>Experience</span>
@@ -198,7 +198,7 @@ const Home = () => {
             ].map((srv, idx) => (
               <article className="service-card modern-card" key={idx}>
                 <div className="card-img-wrapper">
-                  <img src={srv.img} alt={`${srv.title} by Siri Packers and Movers Hyderabad`} loading="lazy" />
+                  <img src={srv.img} alt={`${srv.title} by Siri Packers and Movers Hyderabad`} loading="lazy" width="400" height="200" />
                 </div>
                 <div className="card-content">
                   <h3 style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>

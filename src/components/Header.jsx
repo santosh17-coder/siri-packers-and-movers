@@ -27,11 +27,22 @@ const Header = () => {
       </div>
       <nav className="navbar">
         <div className="container">
-          <Link to="/" className="logo" onClick={closeNav}>
-            <img src="/homelogo.png" alt="Siri Packers & Movers Logo" style={{ height: '60px', width: 'auto' }} />
+          <Link to="/" className="logo" onClick={(e) => {
+            closeNav();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}>
+            <img 
+              src="/homelogo.png" 
+              alt="Siri Packers & Movers Logo" 
+              style={{ height: '60px', width: 'auto' }} 
+              fetchpriority="high"
+            />
           </Link>
           <ul className={`nav-links ${isNavOpen ? 'active' : ''}`}>
-            <li><Link to="/" onClick={closeNav}>Home</Link></li>
+            <li><Link to="/" onClick={(e) => {
+              closeNav();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}>Home</Link></li>
             <li><a href="/#about" onClick={closeNav}>About Us</a></li>
             <li><a href="/#services" onClick={closeNav}>Services</a></li>
             <li><a href="/#why-choose" onClick={closeNav}>Why Choose Us</a></li>
