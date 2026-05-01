@@ -21,6 +21,12 @@ const BookingForm = ({ title = "Get a Free Quote", className = "" }) => {
     setError('');
     const { name, phone, pickup, drop, date, service, message, hasImages } = formData;
 
+    // Name validation (no numbers allowed)
+    if (/\d/.test(name)) {
+      setError('Name should not contain numbers.');
+      return;
+    }
+
     // Phone validation (at least 10 digits)
     const digitsOnly = phone.replace(/\D/g, '');
     if (digitsOnly.length < 10) {
